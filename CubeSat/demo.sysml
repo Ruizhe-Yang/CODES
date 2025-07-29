@@ -1,53 +1,33 @@
-package demo1{
+package DEMO{
     private import CubeSat_Definitions::*;
     /* 1. System Overview */
-    part demo1Entity : CubeSatEntity{
-        // :>> sys :>  demo1Sys;
-        // :>> ss  :>  twoU;
-        // :>> pay  =  INMS;
-        // :>> adcs =  (sunSensor_1, sunSensor_2, sunSensor_3,
-        //             HMC5983,
-        //             ADIS16355,
-        //             GPSReceiver,
-        //             threeAxisReactionWeel,
-        //             ISIS_MTQ);
-        // :>> eps  =  (tripleJunctionGaAs_SolarPanels, 
-        //             P31U);
-        // :>> obdh =  (demo1OBC,
-        //             demo1DataBUS);
-        // :>> comm =  (antenna,
-        //             demo1Transceiver);
-        // :>> tcs = demo1TCS;
-        // :>> dep;
-        // :>> prop;
-        // :>> gs = NPU_GroundStation;
-        // :>> others = (connector1, connector2);
-        part demo1_sys :> sys = demo1Sys;
-        part demo1_ss :> ss = twoU;
+    part DEMOEntity : CubeSatEntity{
+        part DEMO_sys :> sys =  DEMOSys;
+        part DEMO_ss :> ss  =   twoU;
         
-        part demo1_pay :> pay = INMS;
-        part demo1_adcs :> adcs = (sunSensor_1, sunSensor_2, sunSensor_3,
-                                        HMC5983,
-                                        ADIS16355,
-                                        GPSReceiver,
-                                        threeAxisReactionWeel,
-                                        ISIS_MTQ, NPU_MTQ);
-        part demo1_eps :> eps = (tripleJunctionGaAs_SolarPanels,
-                                        P31U);
-        part demo1_obdh :> obdh = (demo1OBC,
-                                        demo1DataBUS);
-        part demo1_comm :> comm = (antenna,
-                                        demo1Transceiver);
-        part demo1_tcs :> tcs = demo1TCS;
-        part demo1_dep :> dep;
-        part demo1_prop :> prop;
-        part demo1_gs :> gs = NPU_GroundStation;
-        part demo1_others :> others = (connector1, connector2);
+        part DEMO_pay :> pay =  INMS;
+        part DEMO_adcs :> adcs =(sunSensor_1, sunSensor_2, sunSensor_3,
+                                HMC5983,
+                                ADIS16355,
+                                GPSReceiver,
+                                threeAxisReactionWeel,
+                                ISIS_MTQ, XXX_MTQ);
+        part DEMO_eps :> eps =  (tripleJunctionGaAs_SolarPanels,
+                                P31U);
+        part DEMO_obdh :> obdh= (DEMOOBC,
+                                DEMODataBUS);
+        part DEMO_comm :> comm= (antenna,
+                                DEMOTransceiver);
+        part DEMO_tcs :> tcs =  DEMOTCS;
+        part DEMO_dep :> dep;
+        part DEMO_prop :> prop;
+        part DEMO_gs :> gs =    XXX_GroundStation;
+        part DEMO_others:>others=(connector1, connector2);
     }
 
-    part demo1Entity2 : CubeSatEntity{
-        :>> vendor = "NPU";
-        :>> sys :>  demo1Sys;
+    part DEMOEntity2 : CubeSatEntity{
+        :>> vendor = "XXX";
+        :>> sys :>  DEMOSys;
         :>> ss  :>  twoU;
         :>> pay  =  INMS;
         :>> adcs =  (sunSensor_1, sunSensor_2, sunSensor_3,
@@ -58,20 +38,20 @@ package demo1{
                     ISIS_MTQ);
         :>> eps  =  (tripleJunctionGaAs_SolarPanels, 
                     P31U);
-        :>> obdh =  (demo1OBC,
-                    demo1DataBUS);
+        :>> obdh =  (DEMOOBC,
+                    DEMODataBUS);
         :>> comm =  (antenna,
-                    demo1Transceiver);
-        :>> tcs = demo1TCS;
+                    DEMOTransceiver);
+        :>> tcs = DEMOTCS;
         :>> dep;
         :>> prop;
-        :>> gs = NPU_GroundStation;
+        :>> gs = XXX_GroundStation;
         :>> others = (connector1, connector2);
     }
 
-    part demo1Entity3 : CubeSatEntity{
-        :> vendor = "NPU";
-        :> sys :>  demo1Sys;
+    part DEMOEntity3 : CubeSatEntity{
+        :> vendor = "XXX";
+        :> sys :>  DEMOSys;
         :> ss  :>  twoU;
         :> pay  =  INMS;
         :> adcs =  (sunSensor_1, sunSensor_2, sunSensor_3,
@@ -82,20 +62,20 @@ package demo1{
                     ISIS_MTQ);
         :> eps  =  (tripleJunctionGaAs_SolarPanels, 
                     P31U);
-        :> obdh =  (demo1OBC,
-                    demo1DataBUS);
+        :> obdh =  (DEMOOBC,
+                    DEMODataBUS);
         :> comm =  (antenna,
-                    demo1Transceiver);
-        :> tcs = demo1TCS;
+                    DEMOTransceiver);
+        :> tcs = DEMOTCS;
         :> dep;
         :> prop;
-        :> gs = NPU_GroundStation;
+        :> gs = XXX_GroundStation;
         :> others = (connector1, connector2);
     }
 
-    part demo1Sys : SYS::QB50_SYS{
-        :>> geometricCenter = demo1Entity.ss.geometricCenter;
-        :>> gravityCenter = CountCubeSatGravityCenter(demo1Entity);
+    part DEMOSys : SYS::QB50_SYS{
+        :>> geometricCenter = DEMOEntity.ss.geometricCenter;
+        :>> gravityCenter = CountCubeSatGravityCenter(DEMOEntity);
         // TBD
         :>> track : EarthOrbit{
             :>> Epoch {
@@ -116,8 +96,8 @@ package demo1{
             :>> argumentOfPerigee = 167.0['°'];
             :>> meanAnomalyAtEpoch = 0.0['°'];
         }
-        attribute sysPowerConsumed = CountSysPowerConsumed(demo1Entity);
-        attribute sysPowerGenerated = CountSysPowerGenerated(demo1Entity);
+        attribute sysPowerConsumed = CountSysPowerConsumed(DEMOEntity);
+        attribute sysPowerGenerated = CountSysPowerGenerated(DEMOEntity);
         attribute powerMargin = sysPowerConsumed / sysPowerGenerated;
     }
 
@@ -185,18 +165,18 @@ package demo1{
     /* 3.3 Main components of structure */
 
     /* 3.4 Mass budget */
-    attribute demo1EntityMass : ISQ::MassValue = CountCubeSatSystemMass(demo1Entity);
+    attribute DEMOEntityMass : ISQ::MassValue = CountCubeSatSystemMass(DEMOEntity);
     
     /* 3.5 Center of gravity */
-    attribute demo1GeometricCenter = demo1Entity2.sys.geometricCenter;
-    attribute demo1GravityCenter = demo1Entity2.sys.gravityCenter;
+    attribute DEMOGeometricCenter = DEMOEntity2.sys.geometricCenter;
+    attribute DEMOGravityCenter = DEMOEntity2.sys.gravityCenter;
     // TBD
 
     /* 3.6 Access hatch on the structure */
     part def MDC1_9S1 :> FunctionComponent{
         :>> sysType = SystemType::OTHERS;
         doc /*
-            The umbilical connector is MDC1-9S1. The dimension of the connector is in12.2ⅹ3.6ⅹ7.5mm.
+            The umbilical connector is MDC1-9S1. The dimension of the connector is in12.2x3.6x7.5mm.
             The detail information is in the figure below.
             */
         item :>> shape : Box {
@@ -227,7 +207,7 @@ package demo1{
     part sunSensor : ADCS::SunSensor{
         doc /*
             In order to achieve high resolution,
-            demo-1 select CubeSat Sun Sensor (CSS) for QB50 mission.
+            DEMO select CubeSat Sun Sensor (CSS) for QB50 mission.
             */
         :>> vendor = "SSBV Space and Ground System Ltd";
         item :>> shape : Box {
@@ -241,7 +221,7 @@ package demo1{
         :>> fieldOfView = 114['°'];
         :>> updateRate = 10[Hz];
         :>> powerConsumption = 0.05[W];
-        :>> mode : demo1Modes{
+        :>> mode : DEMOModes{
             safe{:>> percent = 0;}
             recovery{:>> percent = 100;}
             payloadOperation{:>> percent = 100;}
@@ -296,7 +276,7 @@ package demo1{
         :>> digitalRangeScaling =(75, 150, 300)['°'/s];
         :>> triAxisMeasurementRange = 14[bit];
         :>> powerConsumption = 0.25[W];
-        :>> mode : demo1Modes{
+        :>> mode : DEMOModes{
             safe{:>> percent = 0;}
             recovery{:>> percent = 100;}
             payloadOperation{:>> percent = 0;}
@@ -309,7 +289,7 @@ package demo1{
             The GPS receiver is used to get the position information of demo-1. 
             Low latency and high update rates give the response time and accuracy required for precise dynamic applications.
             */
-        :>> vendor = "NPU";
+        :>> vendor = "XXX";
         :>> tempRange{
             :>> upper = 60['°C'];
             :>> lower = -30['°C'];
@@ -338,7 +318,7 @@ package demo1{
         :>> maxRotateSpeed = 12000['s⁻¹'];
         :>> momentum = 6e-6['kg⋅m²'];
         :>> maxTorque = 0.2e-3['N⋅m'];
-        :>> mode : demo1Modes{
+        :>> mode : DEMOModes{
             safe{:>> percent = 0;}
             recovery{:>> percent = 0;}
             payloadOperation{:>> percent = 50;}
@@ -356,7 +336,7 @@ package demo1{
             :>> width = 90 [mm];
             :>> height = 22 [mm];
         }
-        :>> vendor = ("ISIS", "NPU");
+        :>> vendor = ("ISIS", "XXX");
         :>> mass = 200[g];
         :>> tempRange{
             :>> upper = 70['°C'];
@@ -368,16 +348,16 @@ package demo1{
         :>> offsetCompensatio = "Automatic";
         :>> updateRate = 220[Hz];
         :>> processor = "MSP430";
-        :>> mode : demo1Modes{
+        :>> mode : DEMOModes{
             safe{:>> percent = 0;}
             recovery{:>> percent = 20;}
             payloadOperation{:>> percent = 20;}
         }
     }
 
-    part NPU_MTQ : ADCS::MTQ{
+    part XXX_MTQ : ADCS::MTQ{
         doc /*
-            Another candidate MTQ is made by NPU. The system use a MSP430 controller to receive the temperature information of board, 
+            Another candidate MTQ is made by XXX. The system use a MSP430 controller to receive the temperature information of board, 
             control command from OBC and generate control momentum.
             The communication bus is I2C.
             */
@@ -396,7 +376,7 @@ package demo1{
     /* 5. Electrical Power Subsystem */
     part tripleJunctionGaAs_SolarPanels : EPS::SolarPanels{
         :>> powerConsumption = 0.25[W];
-        :>> mode : demo1Modes{
+        :>> mode : DEMOModes{
             safe{:>> percent = 100;}
             recovery{:>> percent = 100;}
             payloadOperation{:>> percent = 100;}
@@ -418,12 +398,12 @@ package demo1{
         }
     }
     
-    attribute def demo1Mode{
+    attribute def DEMOMode{
         attribute name : String;
         attribute percent : Natural;
     }
 
-    enum def demo1Modes :> demo1Mode{
+    enum def DEMOModes :> DEMOMode{
         enum safe{
             :>> name = "Safe Mode";
         }
@@ -435,7 +415,7 @@ package demo1{
         }
     }
 
-    attribute demo1PowerMargin = demo1Sys.powerMargin;
+    attribute DEMOPowerMargin = DEMOSys.powerMargin;
 
     /* 5.1 P31U from Gomspace for electrical power control */
     part P31U : EPS::PowerSupplyBoard{
@@ -444,7 +424,7 @@ package demo1{
             but with a microcontroller for digital interfacing and maximum power point tracking. 
             This together with a simple and flight proven architecture ensures high reliability. 
             */
-        :>> vendor = ("Gomspace", "NPU");
+        :>> vendor = ("Gomspace", "XXX");
         item :>> shape : Box {
             :>> length = 96 [mm];
             :>> width = 90 [mm];
@@ -475,23 +455,23 @@ package demo1{
         enum MaximumPowerPointTracking;
     }
 
-    /* 5.2 EPS board from NPU for another candidate */
+    /* 5.2 EPS board from XXX for another candidate */
     // TBD
 
     /* 6、7 On Board Computer */
-    part demo1OBC : OBDH::OnBoardComputer{
+    part DEMOOBC : OBDH::OnBoardComputer{
         doc /*
             There are two parallel processors are embedded in one SRAM CycloneV FPGA 
             and an arbitrator is embedded in another Flash Based FPGA.
             */
-        :>> vendor = "NPU";
+        :>> vendor = "XXX";
         :>> operationSystem = "MicroC/OSII";
         :>> tempRange{
             :>> upper = 70['°C'];
             :>> lower = -40['°C'];
         }
         :>> powerConsumption = 0.9[W];
-        :>> mode : demo1Modes{
+        :>> mode : DEMOModes{
             safe{:>> percent = 100;}
             recovery{:>> percent = 100;}
             payloadOperation{:>> percent = 100;}
@@ -521,16 +501,16 @@ package demo1{
         part ConfigurationChipEPCQ256 : OBDH::ElectronicComponents;
         part Proasic3FPGA : OBDH::FPGA;
 
-        interface : BUS connect SRAM_FPGA.dataEnd to demo1DataBUS.dataEnd;
+        interface : BUS connect SRAM_FPGA.dataEnd to DEMODataBUS.dataEnd;
         interface : DataLine connect SRAM_FPGA.dataEnd to HMC5983.dataEnd;
         interface Processor1Output : DataLine connect SRAM_FPGA.dataEnd to FLASHS29GL256.dataEnd;
         interface Processor2Output : DataLine connect SRAM_FPGA.dataEnd to FLASHS29GL256.dataEnd;
     }
 
-    part demo1DataBUS : OBDH::I2C;
+    part DEMODataBUS : OBDH::I2C;
 
     /* 8 Communication Subsystem */
-    part demo1Transceiver : COMM::Transceiver{
+    part DEMOTransceiver : COMM::Transceiver{
         doc/*
             ‘demo-1’ use amateur radio band UHF and VHF for the communication between ground station and satellite. 
             */
@@ -541,7 +521,7 @@ package demo1{
         }
         :>> waveType = (UHF, VHF);
         :>> powerConsumption = 1.7[W];
-        :>> mode : demo1Modes{
+        :>> mode : DEMOModes{
             safe{:>> percent = 100;}
             recovery{:>> percent = 100;}
             payloadOperation{:>> percent = 100;}
@@ -575,7 +555,7 @@ package demo1{
     }
 
     /* 9 Ground Station */
-    part NPU_GroundStation : GS::GroundStation{
+    part XXX_GroundStation : GS::GroundStation{
         :>> location = "Xi'an, China";
         :>> latitude = 34.2392['°'];
         :>> longitude = 108.915['°'];
@@ -598,7 +578,7 @@ package demo1{
     }
 
     /* 10 Thermal Control Subsystem */
-    part demo1TCS : TCS::TCSParameters{
+    part DEMOTCS : TCS::TCSParameters{
         :>> solarCellsEfficiency = 0.2;
         :>> solarCellsAbsorptivity = 0.9;
         :>> frameAbsorptivity = 0.25;

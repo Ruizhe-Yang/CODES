@@ -1,10 +1,10 @@
-package demo1plus{
+package DEMOplus{
     private import CubeSat_Definitions::*;
     /* 1. System Overview */
-    part demo1Entity : CubeSatEntity{
-        part demo1_sys : SYS::QB50_SYS :> sys {
+    part DEMOEntity : CubeSatEntity{
+        part DEMO_sys : SYS::QB50_SYS :> sys {
             :>> geometricCenter = ss.geometricCenter;
-            :>> gravityCenter = CountCubeSatGravityCenter(demo1Entity);
+            :>> gravityCenter = CountCubeSatGravityCenter(DEMOEntity);
             :>> track : EarthOrbit{
                 :>> Epoch {
                     :>> val = "2016-03-00T15:12:00.000Z";
@@ -16,12 +16,12 @@ package demo1plus{
                 :>> argumentOfPerigee = 167.0['°'];
                 :>> meanAnomalyAtEpoch = 0.0['°'];
             }
-            attribute sysPowerConsumed = CountSysPowerConsumed(demo1Entity);
-            attribute sysPowerGenerated = CountSysPowerGenerated(demo1Entity);
+            attribute sysPowerConsumed = CountSysPowerConsumed(DEMOEntity);
+            attribute sysPowerGenerated = CountSysPowerGenerated(DEMOEntity);
             attribute powerMargin = sysPowerConsumed / sysPowerGenerated;
         }
 
-        part demo1_ss : SS::TwoUnitsStructure :> ss {
+        part DEMO_ss : SS::TwoUnitsStructure :> ss {
             doc /*
                 demo-1 is a 2U CubeSat.
                 */
@@ -44,7 +44,7 @@ package demo1plus{
             :>> material = AL7075;
         }
         
-        part demo1_pay :> pay{
+        part DEMO_pay :> pay{
             /* 2. Payload Subsystem */
             part INMS : PAY::PayloadDevice{
                 doc /* 
@@ -69,7 +69,7 @@ package demo1plus{
             }
         }
 
-        part demo1_adcs :> adcs{
+        part DEMO_adcs :> adcs{
             part sunSensor_1 :> sunSensor;
             part sunSensor_2 :> sunSensor;
             part sunSensor_3 :> sunSensor;
@@ -81,7 +81,7 @@ package demo1plus{
             part NPU_MTQ_1 :> NPU_MTQ;
         }
 
-        part demo1_eps :> eps {
+        part DEMO_eps :> eps {
             part tripleJunctionGaAs_SolarPanels_1 :> tripleJunctionGaAs_SolarPanels{
                 part solarPanel_1 :> tripleJunctionGaAs;
                 part solarPanel_2 :> tripleJunctionGaAs;
@@ -94,17 +94,17 @@ package demo1plus{
 
         }
 
-        part demo1_obdh :> obdh{
-            part demo1OBC_1 :> demo1OBC;
-            part demo1DataBUS_1 :> demo1DataBUS;
+        part DEMO_obdh :> obdh{
+            part DEMOOBC_1 :> DEMOOBC;
+            part DEMODataBUS_1 :> DEMODataBUS;
         }
 
-        part demo1_comm :> comm{
+        part DEMO_comm :> comm{
             part antenna_1 :> antenna;
-            part demo1Transceiver_1 :> demo1Transceiver;
+            part DEMOTransceiver_1 :> DEMOTransceiver;
         }
         
-        part demo1_tcs :> tcs : TCS::TCSParameters{
+        part DEMO_tcs :> tcs : TCS::TCSParameters{
             /* 10 Thermal Control Subsystem */
             :>> solarCellsEfficiency = 0.2;
             :>> solarCellsAbsorptivity = 0.9;
@@ -115,12 +115,12 @@ package demo1plus{
             :>> PCBPanelsEmissivity = 0.89;
         }
 
-        part demo1_dep :> dep;
-        part demo1_prop :> prop;
-        part demo1_gs :> gs {
+        part DEMO_dep :> dep;
+        part DEMO_prop :> prop;
+        part DEMO_gs :> gs {
             part NPU_GroundStation_1 :> NPU_GroundStation;
         }
-        part demo1_others :> others = (connector1, connector2);
+        part DEMO_others :> others = (connector1, connector2);
     }
 
     /* 3. Structural Subsystem */
@@ -164,11 +164,11 @@ package demo1plus{
     /* 3.3 Main components of structure */
 
     /* 3.4 Mass budget */
-    attribute demo1EntityMass : ISQ::MassValue = CountCubeSatSystemMass(demo1Entity);
+    attribute DEMOEntityMass : ISQ::MassValue = CountCubeSatSystemMass(DEMOEntity);
     
     /* 3.5 Center of gravity */
-    attribute demo1GeometricCenter = demo1Entity.demo1_sys.geometricCenter;
-    attribute demo1GravityCenter = demo1Entity.demo1_sys.gravityCenter;
+    attribute DEMOGeometricCenter = DEMOEntity.DEMO_sys.geometricCenter;
+    attribute DEMOGravityCenter = DEMOEntity.DEMO_sys.gravityCenter;
     // TBD
 
     /* 3.6 Access hatch on the structure */
@@ -220,7 +220,7 @@ package demo1plus{
         :>> fieldOfView = 114['°'];
         :>> updateRate = 10[Hz];
         :>> powerConsumption = 0.05[W];
-        :>> mode : demo1Modes{
+        :>> mode : DEMOModes{
             safe{:>> percent = 0;}
             recovery{:>> percent = 100;}
             payloadOperation{:>> percent = 100;}
@@ -271,7 +271,7 @@ package demo1plus{
         :>> digitalRangeScaling =(75, 150, 300)['°'/s];
         :>> triAxisMeasurementRange = 14[bit];
         :>> powerConsumption = 0.25[W];
-        :>> mode : demo1Modes{
+        :>> mode : DEMOModes{
             safe{:>> percent = 0;}
             recovery{:>> percent = 100;}
             payloadOperation{:>> percent = 0;}
@@ -313,7 +313,7 @@ package demo1plus{
         :>> maxRotateSpeed = 12000['s⁻¹'];
         :>> momentum = 6e-6['kg⋅m²'];
         :>> maxTorque = 0.2e-3['N⋅m'];
-        :>> mode : demo1Modes{
+        :>> mode : DEMOModes{
             safe{:>> percent = 0;}
             recovery{:>> percent = 0;}
             payloadOperation{:>> percent = 50;}
@@ -343,7 +343,7 @@ package demo1plus{
         :>> offsetCompensatio = "Automatic";
         :>> updateRate = 220[Hz];
         :>> processor = "MSP430";
-        :>> mode : demo1Modes{
+        :>> mode : DEMOModes{
             safe{:>> percent = 0;}
             recovery{:>> percent = 20;}
             payloadOperation{:>> percent = 20;}
@@ -371,7 +371,7 @@ package demo1plus{
     /* 5. Electrical Power Subsystem */
     part tripleJunctionGaAs_SolarPanels : EPS::SolarPanels{
         :>> powerConsumption = 0.25[W];
-        :>> mode : demo1Modes{
+        :>> mode : DEMOModes{
             safe{:>> percent = 100;}
             recovery{:>> percent = 100;}
             payloadOperation{:>> percent = 100;}
@@ -387,12 +387,12 @@ package demo1plus{
         }
     }
     
-    attribute def demo1Mode{
+    attribute def DEMOMode{
         attribute name : String;
         attribute percent : Natural;
     }
 
-    enum def demo1Modes :> demo1Mode{
+    enum def DEMOModes :> DEMOMode{
         enum safe{
             :>> name = "Safe Mode";
         }
@@ -404,7 +404,7 @@ package demo1plus{
         }
     }
 
-    // attribute demo1PowerMargin = demo1Sys.powerMargin;
+    // attribute DEMOPowerMargin = DEMOSys.powerMargin;
 
     /* 5.1 P31U from Gomspace for electrical power control */
     part P31U : EPS::PowerSupplyBoard{
@@ -448,7 +448,7 @@ package demo1plus{
     // TBD
 
     /* 6、7 On Board Computer */
-    part demo1OBC : OBDH::OnBoardComputer{
+    part DEMOOBC : OBDH::OnBoardComputer{
         doc /*
             There are two parallel processors are embedded in one SRAM CycloneV FPGA 
             and an arbitrator is embedded in another Flash Based FPGA.
@@ -460,7 +460,7 @@ package demo1plus{
             :>> lower = -40['°C'];
         }
         :>> powerConsumption = 0.9[W];
-        :>> mode : demo1Modes{
+        :>> mode : DEMOModes{
             safe{:>> percent = 100;}
             recovery{:>> percent = 100;}
             payloadOperation{:>> percent = 100;}
@@ -490,16 +490,16 @@ package demo1plus{
         part ConfigurationChipEPCQ256 : OBDH::ElectronicComponents;
         part Proasic3FPGA : OBDH::FPGA;
 
-        interface : BUS connect SRAM_FPGA.dataEnd to demo1DataBUS.dataEnd;
+        interface : BUS connect SRAM_FPGA.dataEnd to DEMODataBUS.dataEnd;
         interface : DataLine connect SRAM_FPGA.dataEnd to HMC5983.dataEnd;
         interface Processor1Output : DataLine connect SRAM_FPGA.dataEnd to FLASHS29GL256.dataEnd;
         interface Processor2Output : DataLine connect SRAM_FPGA.dataEnd to FLASHS29GL256.dataEnd;
     }
 
-    part demo1DataBUS : OBDH::I2C;
+    part DEMODataBUS : OBDH::I2C;
 
     /* 8 Communication Subsystem */
-    part demo1Transceiver : COMM::Transceiver{
+    part DEMOTransceiver : COMM::Transceiver{
         doc/*
             ‘demo-1’ use amateur radio band UHF and VHF for the communication between ground station and satellite. 
             */
@@ -510,7 +510,7 @@ package demo1plus{
         }
         :>> waveType = (UHF, VHF);
         :>> powerConsumption = 1.7[W];
-        :>> mode : demo1Modes{
+        :>> mode : DEMOModes{
             safe{:>> percent = 100;}
             recovery{:>> percent = 100;}
             payloadOperation{:>> percent = 100;}
